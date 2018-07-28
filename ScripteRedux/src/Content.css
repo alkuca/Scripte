@@ -108,21 +108,7 @@ html, body {
     }
 }
 
-.content-cards{
-    width: 93%;
-    right: 0;
-    left: 0;
-    margin-right: auto;
-    margin-left: auto;
-    display:flex;
-    flex-flow: row wrap;
-    top:27%;
-    bottom: 20px;
-    flex-wrap:wrap;
-    overflow: auto;
-    position:fixed;
-    max-height: 100%;
-}
+
 .content-cards span{
     width: 93%;
     right: 0;
@@ -131,7 +117,7 @@ html, body {
     margin-left: auto;
     display:flex;
     flex-flow: row wrap;
-    top:27%;
+    top:34%;
     bottom: 20px;
     flex-wrap:wrap;
     overflow: auto;
@@ -166,6 +152,7 @@ html, body {
     opacity:1;
     transition:0.2s ease-in-out;
 }
+
 .card:hover{
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.33);
     transition:0.1s ease-in-out;
@@ -228,7 +215,16 @@ html, body {
         max-width:25%;
         width: 25%;
     }
+
 }
+
+@media screen and (max-width: 1367px) {
+    content-cards span {
+        top:32% !important;
+    }
+
+}
+
 
 @media screen and (max-width: 1000px) {
     .card {
@@ -277,13 +273,13 @@ html, body {
         position: absolute;
         font-size:12px;
     }
-    .content-cards {
+    .content-cards span {
         top:42%;
     }
 }
 
 @media screen and (max-width: 635px) {
-    .content-cards{
+    .content-cards span{
         justify-content: center;
     }
     .card {

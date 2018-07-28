@@ -3,14 +3,13 @@ import './Content.css';
 import Card from "./Card";
 import {connect} from "react-redux";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {fetchPersons, createPerson} from "./actions/personActions";
-
+import {fetchPersons, createPerson, filterPerson} from "./actions/personActions";
 class Content extends Component{
     constructor(props){
         super(props);
 
-
-        this.asd = this.asd.bind(this);
+        this.setQuery = this.setQuery.bind(this);
+        this.addNewRandomPerson = this.addNewRandomPerson.bind(this);
     }
 
 
@@ -19,20 +18,18 @@ class Content extends Component{
     }
 
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.newPerson){
-            this.props.persons.unshift(nextProps.newPerson)
-        }
-}
 
-
-
-    asd()
-    {
-        this.props.createPerson({name:Math.floor((Math.random() * 1000) + 1),id:Math.floor((Math.random() * 1000) + 1)});
+    setQuery(query){
+        this.props.filterPerson(query)
     }
 
+    addNewRandomPerson(){
+        this.props.createPerson({id:Math.floor((Math.random() * 1000) + 1),name:"Random Person"});
+    }
+
+
     render(){
+    let filteredPersons = this.props.persons.filter(a => a.name.toLowerCase().includes(this.props.query.toLowerCase()));
         return(
             <div className="content-wrapper">
                 <div className="content">
@@ -40,10 +37,10 @@ class Content extends Component{
                         <h2>Moji Kolegiji</h2>
                         <div className="filter-button-wrapper">
                             <input onChange={(event) => {
-
+                                this.setQuery(event.target.value);
                             }}
                                     className="search-input" type="text" placeholder="Pretraži kolegij..." />
-                                <button onClick={this.asd} className="dodaj-kolegij-button">Dodaj Kolegij</button>
+                                <button onClick={this.addNewRandomPerson} className="dodaj-kolegij-button">Dodaj Kolegij</button>
                         </div>
                     </div>
                     <div className="content-cards">
@@ -51,7 +48,7 @@ class Content extends Component{
                             transitionName="card"
                             transitionEnterTimeout={500}
                             transitionLeaveTimeout={300}>
-                        {this.props.persons.map((person) =>
+                        {filteredPersons.map((person) =>
                             <Card
                                 key={person.id}
                                 name={person.name}
@@ -68,12 +65,13 @@ class Content extends Component{
 
 const mapStateToProps = state => ({
     persons: state.persons.items,
-    newPerson: state.persons.item
+    query: state.persons.query
 });
 
 const mapActionsToProps = {
     fetchPersons: fetchPersons,
-    createPerson: createPerson
+    createPerson: createPerson,
+    filterPerson: filterPerson
 };
 
 export default connect(mapStateToProps,mapActionsToProps)(Content);

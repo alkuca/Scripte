@@ -1,8 +1,8 @@
-import {FETCH_PERSONS, NEW_PERSON, REMOVE_PERSON} from "../actions/types";
+import {FETCH_PERSONS, NEW_PERSON, REMOVE_PERSON, FILTER_PERSONS} from "../actions/types";
 
 const initialState = {
     items: [],
-    item: {}
+    query:""
 };
 
 export default function (state = initialState, action) {
@@ -15,12 +15,18 @@ export default function (state = initialState, action) {
         case NEW_PERSON:
             return {
                 ...state,
-                item: action.payload
+                items: [...state.items, action.payload]
             };
         case REMOVE_PERSON:
             return {
                 ...state,
                 items: state.items.filter(item => item.id !== action.payload)
+            };
+        case FILTER_PERSONS:
+            return{
+                ...state,
+                items: state.items,
+                query: state.query
             };
         default:
             return state;

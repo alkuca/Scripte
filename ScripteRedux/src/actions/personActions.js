@@ -1,4 +1,4 @@
-import {FETCH_PERSONS, NEW_PERSON, REMOVE_PERSON} from "./types";
+import {FETCH_PERSONS, NEW_PERSON, REMOVE_PERSON, FILTER_PERSONS} from "./types";
 
 export const fetchPersons = () => dispatch => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -36,3 +36,9 @@ export const removePerson = (userToRemove) => dispatch => {
 
 };
 
+export const filterPerson = (query) => dispatch => {
+    dispatch({
+        type:FILTER_PERSONS,
+        payload: query
+    })
+}
