@@ -1,4 +1,4 @@
-import {FETCH_PERSONS, NEW_PERSON, REMOVE_PERSON, FILTER_PERSONS} from "../actions/types";
+import {FETCH_PERSONS, NEW_PERSON, REMOVE_PERSON, FILTER_PERSONS,USER_SIGN_UP_REQUEST} from "../actions/types";
 
 const initialState = {
     items: [],
@@ -25,8 +25,7 @@ export default function (state = initialState, action) {
         case FILTER_PERSONS:
             return{
                 ...state,
-                items: state.items,
-                query: state.query
+                query: action.payload
             };
         default:
             return state;

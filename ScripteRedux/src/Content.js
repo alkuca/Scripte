@@ -4,12 +4,21 @@ import Card from "./Card";
 import {connect} from "react-redux";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {fetchPersons, createPerson, filterPerson} from "./actions/personActions";
+import AddKolegijModal from "./AddKolegijModal"
+
 class Content extends Component{
     constructor(props){
         super(props);
 
+        this.state={
+            modalIsOpen: false
+        };
+
         this.setQuery = this.setQuery.bind(this);
         this.addNewRandomPerson = this.addNewRandomPerson.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
 
@@ -18,18 +27,35 @@ class Content extends Component{
     }
 
 
-
     setQuery(query){
         this.props.filterPerson(query)
     }
 
-    addNewRandomPerson(){
-        this.props.createPerson({id:Math.floor((Math.random() * 1000) + 1),name:"Random Person"});
+    addNewRandomPerson() {
+        this.props.createPerson({id:Math.floor((Math.random() * 1000) + 1),name:"New Person"});
+    }
+
+
+    handleButtonClick(){
+        this.addNewRandomPerson();
+        this.openModal();
+    }
+
+    openModal(){
+        this.setState({
+            modalIsOpen: true
+        })
+    }
+
+    closeModal(){
+        this.setState({
+            modalIsOpen: false
+        })
     }
 
 
     render(){
-    let filteredPersons = this.props.persons.filter(a => a.name.toLowerCase().includes(this.props.query.toLowerCase()));
+        let filteredPersons = this.props.persons.filter(a => a.name.toLowerCase().includes(this.props.query.toLowerCase()));
         return(
             <div className="content-wrapper">
                 <div className="content">
@@ -39,8 +65,8 @@ class Content extends Component{
                             <input onChange={(event) => {
                                 this.setQuery(event.target.value);
                             }}
-                                    className="search-input" type="text" placeholder="Pretraži kolegij..." />
-                                <button onClick={this.addNewRandomPerson} className="dodaj-kolegij-button">Dodaj Kolegij</button>
+                                   className="search-input" type="text" placeholder="Pretraži kolegij..." />
+                            <button onClick={this.handleButtonClick} className="dodaj-kolegij-button">Dodaj Kolegij</button>
                         </div>
                     </div>
                     <div className="content-cards">
@@ -48,16 +74,17 @@ class Content extends Component{
                             transitionName="card"
                             transitionEnterTimeout={500}
                             transitionLeaveTimeout={300}>
-                        {filteredPersons.map((person) =>
-                            <Card
-                                key={person.id}
-                                name={person.name}
-                                id={person.id}
-                            />
-                        )}
+                            {filteredPersons.map((person) =>
+                                <Card
+                                    key={person.id}
+                                    name={person.name}
+                                    id={person.id}
+                                />
+                            )}
                         </ReactCSSTransitionGroup>
                     </div>
                 </div>
+                    <AddKolegijModal modalIsOpen={this.state.modalIsOpen} closeModal={this.closeModal}/>
             </div>
         )
     }

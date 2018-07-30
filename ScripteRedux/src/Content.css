@@ -313,8 +313,8 @@ html, body {
     transform:scale(0);
 }
 
-.card-enter.example-enter-active {
-    transition: opacity 500ms ease-in;
+.card-enter.card-enter-active {
+
     transform:scale(1);
 }
 
@@ -322,7 +322,10 @@ html, body {
     opacity: 1;
 }
 
-.card-leave.example-leave-active {
+.card-leave.card-leave-active {
     opacity: 0.01;
-    transition: opacity 300ms ease-in;
+
 }
+
+
+

@@ -1,4 +1,6 @@
-import {FETCH_PERSONS, NEW_PERSON, REMOVE_PERSON, FILTER_PERSONS} from "./types";
+import {FETCH_PERSONS, NEW_PERSON, REMOVE_PERSON, FILTER_PERSONS,USER_SIGN_UP_REQUEST} from "./types";
+import axios from "axios";
+
 
 export const fetchPersons = () => dispatch => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -41,4 +43,11 @@ export const filterPerson = (query) => dispatch => {
         type:FILTER_PERSONS,
         payload: query
     })
+};
+
+
+export function userSignUpRequest(userData) {
+    return dispatch => {
+        return axios.post("https://jsonplaceholder.typicode.com/users/" + userData)
+    }
 }
