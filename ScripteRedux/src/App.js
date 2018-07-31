@@ -7,7 +7,7 @@ import store from "./store"
 import {Route} from "react-router-dom"
 import Register from "./Register"
 import Login from "./Login"
-import AddKolegijModal from "./AddKolegijModal"
+import KolegijContent from "./KolegijContent";
 
 class App extends Component {
   render() {
@@ -18,6 +18,8 @@ class App extends Component {
               <Route exact path="/" component={Content}/>
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
+              <Route path="/kolegij" component={Navbar}/>
+              <Route path="/kolegij" component={KolegijContent}/>
           </div>
         </Provider>
     );

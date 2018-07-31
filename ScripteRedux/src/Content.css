@@ -28,7 +28,6 @@ html, body {
     transition: 0.2s ease-in-out;
     outline:none;
     font-size:18px;
-
 }
 
 .search-input::placeholder{

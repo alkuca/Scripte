@@ -1,15 +1,39 @@
 import React, { Component } from 'react';
 import './KolegijContent.css';
+import {createPerson, fetchPersons, filterPerson} from "./actions/personActions";
+import connect from "react-redux/es/connect/connect";
+import  KolegijContentCard from "./KolegijContentCard"
+import Card from "./Card";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+
 
 class KolegijContent extends Component {
+    constructor(props){
+        super(props);
+
+        this.setQuery = this.setQuery.bind(this);
+    }
+
+    componentDidMount(){
+        this.props.fetchPersons();
+    }
+
+    setQuery(query){
+        this.props.filterPerson(query)
+    }
     render(){
+        let filteredPersons = this.props.persons.filter(a => a.name.toLowerCase().includes(this.props.query.toLowerCase()));
         return(
             <div className="kolegij-content-wrapper">
                 <div className="kolegij-content">
                     <div className="kolegij-content-filter-wrapper">
                         <h2>Strukture Podataka i Algoritmi  <span className="kolegij-details">/  3. godina informatike</span></h2>
                         <div className="kolegij-filter-button-wrapper">
-                            <input className="resours-search-input" type="text" placeholder="Pretraži resurs (ime)..." />
+                            <input onChange={(event) => {
+                                this.setQuery(event.target.value);
+                            }}
+
+                                className="resours-search-input" type="text" placeholder="Pretraži resurs (ime)..." />
                             <select
                                 className="resours-type-select">
                                 <option value="" disabled selected>Vrsta</option>
@@ -36,448 +60,13 @@ class KolegijContent extends Component {
                         </div>
                     </div>
                     <div className="resource-content-cards">
-
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="resource-card">
-                            <div className="resource-card-content">
-                                <h3 className="resource-card-content-kolegij">
-                                    Matematika
-                                </h3>
-                                <p className="resource-card-content-type">
-                                    Kolokvij
-                                </p>
-                                <p className="resource-card-content-date">
-                                    18.04.2018
-                                </p>
-                                <p className="resource-card-content-name">
-                                    Ime Kolokvija
-                                </p>
-                                <div className="resource-card-content-buttons">
-                                    <button id="otvori-button">Otvori</button>
-                                    <button id="preuzmi-button">Preuzmi</button>
-                                </div>
-                            </div>
-                        </div>
+                        {filteredPersons.map((person) =>
+                            <KolegijContentCard
+                                key={person.id}
+                                name={person.name}
+                                id={person.id}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
@@ -485,4 +74,16 @@ class KolegijContent extends Component {
     }
 }
 
-export default KolegijContent;
+const mapStateToProps = state => ({
+    persons: state.persons.items,
+    query: state.persons.query
+});
+
+const mapActionsToProps = {
+    fetchPersons: fetchPersons,
+    createPerson: createPerson,
+    filterPerson: filterPerson
+};
+
+export default connect(mapStateToProps,mapActionsToProps)(KolegijContent);
+

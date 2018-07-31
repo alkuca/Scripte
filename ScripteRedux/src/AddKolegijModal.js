@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './AddKolegijModal.css';
-import {connect} from "react-redux";
-import {userSignUpRequest} from "./actions/personActions";
 import ModalKolegijItem from "./ModalKolegijItem"
 const images = require.context('../public/images', true);
 const iks = images("./iks.png");

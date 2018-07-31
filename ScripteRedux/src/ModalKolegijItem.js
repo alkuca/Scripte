@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './ModalKolegijItem.css';
-import {connect} from "react-redux";
-import {userSignUpRequest} from "./actions/personActions";
+
 
 
 class ModalKolegijItem extends Component {
