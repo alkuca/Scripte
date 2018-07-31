@@ -7,7 +7,6 @@ const images = require.context('../public/images', true);
 const iks = images("./iks.png");
 
 class AddKolegijModal extends Component {
-
     render(){
          let modalIsOpen = this.props.modalIsOpen;
 

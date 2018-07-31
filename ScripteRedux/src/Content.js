@@ -54,7 +54,9 @@ class Content extends Component{
     }
 
 
+
     render(){
+
         let filteredPersons = this.props.persons.filter(a => a.name.toLowerCase().includes(this.props.query.toLowerCase()));
         return(
             <div className="content-wrapper">
